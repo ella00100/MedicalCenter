@@ -95,8 +95,9 @@ CREATE TABLE Nurse (
   FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId)
 ); 
 
+-- Treatment Table: 치료 정보(PK-ID, FK-PatientId/NurseId)
 CREATE TABLE Treatment (
-  ID INT NOT NULL,
+  ID INT NOT NULL AUTO_INCREMENT,
   PatientId VARCHAR(30) NOT NULL,
   mgrNurseId VARCHAR(30) NOT NULL,
   TreatTime DATETIME,
@@ -106,13 +107,15 @@ CREATE TABLE Treatment (
   FOREIGN KEY (mgrNurseId) REFERENCES Nurse(NurseId)
 );
 
+-- Inpatient Table: 입원 정보(PK-ID)
 CREATE TABLE Inpatient (
-  PatientId VARCHAR(30) NOT NULL,
-  Rid INT NULL,
-  ReserveNum INT NULL,
+ID INT NOT NULL AUTO_INCREMENT,
+  RoomId INT NULL,
+  AdmissionDate DATETIME null,
   DischargeDate DATETIME NULL,
-  PRIMARY KEY (PatientId),
+  PatientId VARCHAR(30) NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (RoomId) REFERENCES Room(Rid),
+  FOREIGN KEY (ReserveNum) REFERENCES Reservation(ReserveNum),
   FOREIGN KEY (PatientId) REFERENCES Patient(PatientId),
-  FOREIGN KEY (Rid) REFERENCES Room(Rid),
-  FOREIGN KEY (ReserveNum) REFERENCES Reservation(ReserveNum)
 );
