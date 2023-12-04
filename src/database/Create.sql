@@ -5,7 +5,7 @@ USE SY_HOSPITAL_DB;
 -- Building Table: 병원 건물 정보(BuildingId, Name)
 CREATE TABLE Building (
   BuildingId INT NOT NULL AUTO_INCREMENT,
-  Name VARCHAR(20) NULL,
+  Name VARCHAR(40) NULL,
   PRIMARY KEY (BuildingId)
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE MedicalSpecialty (
   DepartmentId INT NOT NULL AUTO_INCREMENT,
   RoomId INT,
   Name VARCHAR(30) NULL,
-  PhoneNumber INT NULL,
+  PhoneNumber VARCHAR(45) NULL,
   PRIMARY KEY (DepartmentId),
   FOREIGN KEY(RoomId) REFERENCES Room(RoomId)
 );
@@ -34,7 +34,7 @@ CREATE TABLE Manager (
   DepartmentId INT NOT NULL,
   Name VARCHAR(30) NULL,
   Address VARCHAR(45) NULL,
-  PhoneNumber INT NULL,
+  PhoneNumber VARCHAR(45) NULL,
   Password VARCHAR(45) NULL,
   PRIMARY KEY(ManagerId),
   FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId)
@@ -46,7 +46,7 @@ CREATE TABLE Doctor (
     DepartmentId INT NOT NULL,
     Name VARCHAR(30) NULL,
     Address VARCHAR(45) NULL,
-    PhoneNumber INT NULL,
+    PhoneNumber VARCHAR(45) NULL,
     Password VARCHAR(45) NULL,
     PRIMARY KEY (DoctorId),
     FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId)
@@ -73,10 +73,10 @@ CREATE TABLE Patient (
   SocialSecurityNum INT NULL,
   Gender CHAR(1) NULL,
   Address VARCHAR(45) NULL,
-  BloodType CHAR(2) NULL,
+  BloodType CHAR(3) NULL,
   Height FLOAT NULL,
   Weight FLOAT NULL,
-  PhoneNumber INT NULL,
+  PhoneNumber VARCHAR(45) NULL,
   Password VARCHAR(45) NULL,
   PRIMARY KEY (PatientId),
   FOREIGN KEY (DoctorId) REFERENCES Doctor(DoctorId),

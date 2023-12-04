@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node ./src/index.js"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ella00100/MedicalCenter.git"
@@ -25,6 +24,7 @@
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "morgan": "^1.10.0",
     "mysql2": "^3.6.5",
     "nodemon": "^3.0.2"
