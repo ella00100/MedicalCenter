@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SY Hospital</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/owl.carousel.min.css" rel="stylesheet">
+    <link href="css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="css/templatemo-medic-care.css" rel="stylesheet">
+    <!-- TemplateMo 566 Medic Care -->
+</head>
+
+<body id="top">
+    <main>
+        <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-lg">
+            <div class="container">
+                <a class="navbar-brand mx-auto d-lg-none" href="/">
+                    SY Hospital
+                    <strong class="d-block">Hospital Management System</strong>
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <a class="navbar-brand d-none d-lg-block" href="/">
+                            SY Hospital
+                            <strong class="d-block">Hospital Management System</strong>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Login section -->
+        <section class="login">
+            <div class="container">
+                <div class="form_container">
+                    <div class="heading_container">
+                        <h2>Sign In</h2>
+                            </div>
+                            
+                            <label for="role">Select user role:</label>
+                            <div class="radio-group">
+                                <input type="radio" id="manager" name="role" value="manager" checked>
+                                <label for="manager" class="toggle-label">Manager</label>
+
+                                <input type="radio" id="doctor" name="role" value="doctor">
+                                <label for="doctor" class="toggle-label">Doctor</label>
+
+                                <input type="radio" id="nurse" name="role" value="nurse">
+                                <label for="nurse" class="toggle-label">Nurse</label>
+
+                                <input type="radio" id="patient" name="role" value="patient">
+                                <label for="patient" class="toggle-label">Patient</label>
+                            </div>
+
+                            <div id="managerForm" style="display: block;">
+                                <form id="user" method="post" action='/signInManager'>
+                                    <label for="id">Manager ID</label>
+                                    <input id="id" name="id" type="text" required placeholder="Your ID">
+                                
+                                    <label for="password">Password</label>
+                                    <input id="passwd" name='password' type="password" required placeholder="Your Password">
+                                    <button>
+                                        Sign In
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div id="doctorForm" style="display: none;">
+                                <form id="user" method="post" action='/signInDoctor'>
+                                    <label for="id">Doctor ID</label>
+                                    <input id="id" name="id" type="text" required placeholder="Your ID">
+                                
+                                    <label for="password">Password</label>
+                                    <input id="passwd" name='password' type="password" required placeholder="Your Password">
+                                    <button>
+                                        Sign In
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div id="nurseForm" style="display: none;">
+                                <form id="user" method="post" action='/signInNurse'>
+                                    <label for="id">Nurse ID</label>
+                                    <input id="id" name="id" type="text" required placeholder="Your ID">
+                                
+                                    <label for="password">Password</label>
+                                    <input id="passwd" name='password' type="password" required placeholder="Your Password">
+                                    <button>
+                                        Sign In
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div id="patientForm" style="display: none;">
+                                <form id="user" method="post" action='/signInPatient'>
+                                    <label for="id">Patient ID</label>
+                                    <input id="id" name="id" type="text" required placeholder="Your ID">
+                                
+                                    <label for="password">Password</label>
+                                    <input id="passwd" name='password' type="password" required placeholder="Your Password">
+                                    <button>
+                                        Sign In
+                                    </button>
+                                </form>
+                            </div>
+
+                            <script>
+                        const roleForms = {
+                            'manager': document.getElementById('managerForm'),
+                            'doctor': document.getElementById('doctorForm'),
+                            'nurse': document.getElementById('nurseForm'),
+                            'patient': document.getElementById('patientForm')
+                        };
+
+                        function showForm(role) {
+                            for (const formRole in roleForms) {
+                                if (role === formRole) {
+                                    roleForms[formRole].style.display = 'block';
+                                } else {
+                                    roleForms[formRole].style.display = 'none';
+                                }
+                            }
+                        }
+
+                        const radioButtons = document.querySelectorAll('input[name="role"]');
+                        radioButtons.forEach(button => {
+                            button.addEventListener('change', () => {
+                                showForm(button.value);
+                            });
+                        });
+
+                        // 초기 로드 시 매니저 폼을 보여줍니다.
+                        showForm('manager');
+                    </script>
+                        </div>
+            </div>
+        </section>
+        <!-- end contact section -->
+   
+    </main>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/scrollspy.min.js"></script>
+    <script src="js/custom.js"></script>
+    <!-- TemplateMo 566 Medic Care -->
+</body>
+</html>

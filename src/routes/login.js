@@ -4,7 +4,7 @@ import { insertSql } from '../database/sql';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('home', { data: " " });
+    res.render('login', { data: " " });
 })
 
 module.exports = router;
