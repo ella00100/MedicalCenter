@@ -5,6 +5,9 @@ import expressSession from "express-session";
 
 import homeRouter from './routes/home';
 import loginRouter from './routes/login';
+import managerRouter from './routes/manager';
+import employeeRouter from './routes/employee';
+import patientRouter from './routes/patient';
 
 const PORT = 8000;
 
@@ -30,6 +33,9 @@ app.use(logger('dev'));
 
 app.use('/', homeRouter);
 app.use('/login', loginRouter);
+app.use('/manager', managerRouter);
+app.use('/employee', employeeRouter);
+app.use('/patient', patientRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`)

@@ -62,12 +62,14 @@
                             </div>
 
                             <div id="managerForm" style="display: block;">
-                                <form id="user" method="post" action='/signInManager'>
+                                <form id="user" method="post" action='/login'>
                                     <label for="id">Manager ID</label>
                                     <input id="id" name="id" type="text" required placeholder="Your ID">
                                 
                                     <label for="password">Password</label>
                                     <input id="passwd" name='password' type="password" required placeholder="Your Password">
+
+                                    <input type="hidden" id="role" name="role" value="Manager">
                                     <button>
                                         Sign In
                                     </button>
@@ -75,12 +77,13 @@
                             </div>
 
                             <div id="doctorForm" style="display: none;">
-                                <form id="user" method="post" action='/signInDoctor'>
+                                <form id="user" method="post" action='/login'>
                                     <label for="id">Doctor ID</label>
                                     <input id="id" name="id" type="text" required placeholder="Your ID">
                                 
                                     <label for="password">Password</label>
                                     <input id="passwd" name='password' type="password" required placeholder="Your Password">
+                                    <input type="hidden" id="role" name="role" value="Doctor">
                                     <button>
                                         Sign In
                                     </button>
@@ -88,12 +91,13 @@
                             </div>
 
                             <div id="nurseForm" style="display: none;">
-                                <form id="user" method="post" action='/signInNurse'>
+                                <form id="user" method="post" action='/login'>
                                     <label for="id">Nurse ID</label>
                                     <input id="id" name="id" type="text" required placeholder="Your ID">
                                 
                                     <label for="password">Password</label>
                                     <input id="passwd" name='password' type="password" required placeholder="Your Password">
+                                    <input type="hidden" id="role" name="role" value="Nurse">
                                     <button>
                                         Sign In
                                     </button>
@@ -101,12 +105,13 @@
                             </div>
 
                             <div id="patientForm" style="display: none;">
-                                <form id="user" method="post" action='/signInPatient'>
+                                <form id="user" method="post" action='/login'>
                                     <label for="id">Patient ID</label>
                                     <input id="id" name="id" type="text" required placeholder="Your ID">
                                 
                                     <label for="password">Password</label>
                                     <input id="passwd" name='password' type="password" required placeholder="Your Password">
+                                    <input type="hidden" id="role" name="role" value="Patient">
                                     <button>
                                         Sign In
                                     </button>
@@ -138,7 +143,6 @@
                             });
                         });
 
-                        // 초기 로드 시 매니저 폼을 보여줍니다.
                         showForm('manager');
                     </script>
                         </div>
