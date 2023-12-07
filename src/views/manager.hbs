@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -21,7 +21,7 @@
 
 <body id="top">
     <main>
-        <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-lg">
+ <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-lg">
             <div class="container">
                 <a class="navbar-brand mx-auto d-lg-none" href="/">
                     SY Hospital
@@ -38,54 +38,112 @@
             </div>
         </nav>
 
-            <section class="section-padding" id="about">
-                <div class="container">
-                    <div class="row">
-                <h1>{{ title }}</h1>
-                        <div class="col-lg-6 col-md-6 col-12">
-  <h2>{{ title1 }}</h2>
-<table>
-  <tr>
-    <td>DoctorId</td>
-    <td>DepartmentId</td>
-    <td>Name</td>
-    <td>Address</td>
-    <td>PhoneNumber</td>
-  </tr>
-  {{#each doctor}}
-  <tr>
-    <td>{{DoctorId}}</td>
-    <td>{{DepartmentId}}</td>
-    <td>{{Name}}</td>
-    <td>{{Address}}</td>
-    <td>{{PhoneNumber}}</td>
-  </tr>
-  {{/each}}
-</table>
-</div>
-<div class="col-lg-6 col-md-6 col-12">
-  <h2>{{ title2 }}</h2>
-<table>
-  <tr>
-    <td>NurseId</td>
-        <td>DepartmentId</td>
-    <td>Name</td>
-    <td>Address</td>
-    <td>PhoneNumber</td>
-  </tr>
-  {{#each nurse}}
-  <tr>
-    <td>{{NurseId}}</td>
-        <td>{{DepartmentId}}</td>
-    <td>{{Name}}</td>
-    <td>{{Address}}</td>
-    <td>{{PhoneNumber}}</td>
-  </tr>
-  {{/each}}
-</table>
-</div>
+        <section class="section-padding" id="about">
+            <div class="container">
+                <div class="row">
+                    <h1>{{ title }}</h1>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <h2>{{ title1 }}</h2>
+                        <table>
+                            <tr>
+                                <td>DoctorId</td>
+                                <td>DepartmentId</td>
+                                <td>Department</td>
+                                <td>Name</td>
+                                <td>Address</td>
+                                <td>PhoneNumber</td>
+                            </tr>
+                            {{#each doctor}}
+                            <tr>
+                            <form method="post" action="/manager/updateDoctor">
+                                <td>{{DoctorId}}</td>
+                                <td style="display: none"><input type="text" name="DoctorId" value={{DoctorId}}></td>
+                                <td><input type="text" name="DepartmentId" value={{DepartmentId}}></td>
+                                <td>{{Department}}</td>
+                                <td><input type="text" name="Name" value="{{Name}}"></td>
+                                <td><input type="text" name="Address" value="{{Address}}"></td>
+                                <td><input type="text" name="PhoneNumber" value="{{PhoneNumber}}"></td>
+                                <td>
+                                        <input type="submit" value="Update">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="/manager/deleteDoctor">
+                                        <input type="hidden" name="DoctorId" value={{DoctorId}}>
+                                        <input type="submit" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                            {{/each}}
 
+                            <tr>
+                <form method="post" action="/manager/addDoctor">
+                    <td><input type="text" name="DoctorId" value=""></td>
+                    <td><input type="text" name="DepartmentId" value=""></td>
+                    <td><input type="hidden" name="Department" value=""></td>
+                    <td><input type="text" name="Name" value=""></td>
+                    <td><input type="text" name="Address" value=""></td>
+                    <td><input type="text" name="PhoneNumber" value=""></td>
+                    <td colspan="2">
+                        <input type="submit" value="Add">
+                    </td>
+                </form>
+            </tr>
+                        </table>
+                    </div>                 
+                </div>
 
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <h2>{{ title2 }}</h2>
+                        <table>
+                            <tr>
+                                <td>NurseId</td>
+                                <td>DepartmentId</td>
+                                <td>Department</td>
+                                <td>Name</td>
+                                <td>Address</td>
+                                <td>PhoneNumber</td>
+                            </tr>
+                            {{#each nurse}}
+                            <tr>
+                                <td>{{NurseId}}</td>
+                                <td style="display: none"><input type="text" name="NurseId" value={{NurseId}}></td>
+                                <td><input type="text" name="DepartmentId" value={{DepartmentId}}></td>
+                                <td>{{Department}}</td>
+                                <td><input type="text" name="Name" value="{{Name}}"></td>
+                                <td><input type="text" name="Address" value="{{Address}}"></td>
+                                <td><input type="text" name="PhoneNumber" value="{{PhoneNumber}}"></td>
+                                <td>
+                                    <form method="post" action="/manager/updateNurse">
+                                        <input type="hidden" name="NurseId" value={{NurseId}}>
+                                        <input type="submit" value="Update">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="/manager/deleteNurse">
+                                        <input type="hidden" name="NurseId" value={{NurseId}}>
+                                        <input type="submit" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                            {{/each}}
+                                                        <tr>
+                <form method="post" action="/manager/addNurse">
+                    <td><input type="text" name="NurseId" value=""></td>
+                    <td><input type="text" name="DepartmentId" value=""></td>
+                    <td><input type="hidden" name="Department" value=""></td>
+                    <td><input type="text" name="Name" value=""></td>
+                    <td><input type="text" name="Address" value=""></td>
+                    <td><input type="text" name="PhoneNumber" value=""></td>
+                    <td colspan="2">
+                        <input type="submit" value="Add">
+                    </td>
+                </form>
+            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
