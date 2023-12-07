@@ -21,7 +21,7 @@ export const selectSql = {
     return result;
   },
   getDoctor: async () => {
-    const sql = `select D.DoctorId, D.DepartmentId, M.Name As Department, D.Name, D.Address, D.PhoneNumber 
+    const sql = `select D.DoctorId, D.DepartmentId, M.Name As Department, D.Name, D.Address, D.PhoneNumber, D.Password 
         from Doctor D 
         join MedicalSpecialty M 
         on D.DepartmentId = M.DepartmentId`;
@@ -29,7 +29,7 @@ export const selectSql = {
     return result;
   },
   getNurse: async () => {
-    const sql = `select N.NurseId, N.DepartmentId, M.Name As Department, N.Name, N.Address, N.PhoneNumber 
+    const sql = `select N.NurseId, N.DepartmentId, M.Name As Department, N.Name, N.Address, N.PhoneNumber, N.Password
         from Nurse N 
         join MedicalSpecialty M 
         on N.DepartmentId = M.DepartmentId`;
@@ -43,9 +43,8 @@ export const selectSql = {
   },
   // 의사 -> 자신의 examination 조회, Patient 조회
   getExamination: async (data) => {
-    const sql = `select * from Examination
-        where DoctorId = "${data.DoctorId}"`;
-    const [result] = await promisePool.query(sql);
+    const sql = "SELECT * FROM Examination WHERE DoctorId = ?";
+    const [result] = await promisePool.query(sql, [data.DoctorId]);
     return result;
   },
   getPatientForDoctor: async (data) => {
@@ -57,9 +56,8 @@ export const selectSql = {
 
   // 간호사 -> 자신의 treatment 조회, Patient 조회
   getTreatment: async (data) => {
-    const sql = `select * from treatment
-        where NurseId = "${data.NurseId}"`;
-    const [result] = await promisePool.query(sql);
+    const sql = "SELECT * FROM treatment WHERE NurseId = ?";
+    const [result] = await promisePool.query(sql, [data.NurseId]);
     return result;
   },
   getPatientForNurse: async (data) => {
