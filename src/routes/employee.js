@@ -14,8 +14,6 @@ router.get("/", async (req, res) => {
     });
 
     console.log(req.session.userId);
-    console.log(examination);
-    console.log(patient);
 
     res.render("employee", {
       title: "Doctor",
@@ -34,6 +32,8 @@ router.get("/", async (req, res) => {
       NurseId: req.session.userId,
     });
 
+    console.log(req.session.userId);
+
     res.render("employee", {
       title: "Nurse",
       title1: "Treatment",
@@ -42,6 +42,90 @@ router.get("/", async (req, res) => {
       treatment,
       patient,
     });
+  }
+});
+
+router.post("/addExamination", async (req, res) => {
+  try {
+    const vars = req.body;
+
+    const data = {
+      DoctorId: req.session.userId,
+      PatientId: vars.PatientId,
+      ExamDate: vars.ExamDate,
+      Details: vars.Details,
+    };
+    await insertSql.setExamination(data);
+    res.redirect("/employee");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.post("/addTreatment", async (req, res) => {
+  try {
+    const vars = req.body;
+
+    const data = {
+      NurseId: req.session.userId,
+      PatientId: vars.PatientId,
+      TreatTime: vars.TreatTime,
+      Details: vars.Details,
+    };
+    await insertSql.setTreatment(data);
+    res.redirect("/employee");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.post("/updateExamination", async (req, res) => {
+  try {
+    const data = req.body;
+    await updateSql.updateExamination(data);
+    res.redirect("/employee");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.post("/updateTreatment", async (req, res) => {
+  try {
+    const data = req.body;
+    await updateSql.updateTreatment(data);
+    res.redirect("/employee");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.post("/deleteExamination", async (req, res) => {
+  try {
+    const vars = req.body;
+
+    const data = {
+      ExaminationId: vars.ExaminationId,
+    };
+    await deleteSql.deleteExamination(data);
+    res.redirect("/employee");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.post("/deleteTreatment", async (req, res) => {
+  try {
+    const data = req.body;
+    await deleteSql.deleteTreatment(data);
+    res.redirect("/employee");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 

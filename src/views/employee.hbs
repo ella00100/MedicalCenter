@@ -55,40 +55,145 @@
                 <tr>
                   <th>DoctorId</th>
                   <th>ExaminationId</th>
+                  <th>PatientId</th>
                   <th>ExamDate</th>
                   <th>Details</th>
-                  <th>PatientId</th>
                 </tr>
                 {{#each examination}}
                   <tr>
-                    <td>{{DoctorId}}</td>
-                    <td>{{ExaminationId}}</td>
-                    <td>{{ExamDate}}</td>
-                    <td>{{Details}}</td>
-                    <td>{{PatientId}}</td>
+                    <form method="post" action="/employee/updateExamination">
+                      <td>{{DoctorId}}</td>
+                      <td style="display: none"><input
+                          type="text"
+                          name="DoctorId"
+                          value={{DoctorId}}
+                        /></td>
+                      <td>{{ExaminationId}}</td>
+                      <td style="display: none"><input
+                          type="text"
+                          name="ExaminationId"
+                          value={{ExaminationId}}
+                        /></td>
+                      <td><input
+                          type="text"
+                          name="PatientId"
+                          value="{{PatientId}}"
+                        /></td>
+                      <td><input
+                          type="text"
+                          name="ExamDate"
+                          value="{{ExamDate}}"
+                        /></td>
+                      <td><input
+                          type="text"
+                          name="Details"
+                          value="{{Details}}"
+                        /></td>
+                      <td><input type="submit" value="Update" /></td>
+                    </form>
+                    <td>
+                      <form method="post" action="/employee/deleteExamination">
+                        <input
+                          type="hidden"
+                          name="ExaminationId"
+                          value={{ExaminationId}}
+                        />
+                        <input type="submit" value="Delete" />
+                      </form>
+                    </td>
                   </tr>
                 {{/each}}
+                <tr>
+                  <form method="post" action="/employee/addExamination">
+                    <td><input type="hidden" name="DoctorId" value="" /></td>
+                    <td><input
+                        type="hidden"
+                        name="ExaminationId"
+                        value=""
+                      /></td>
+                    <td><input type="text" name="PatientId" value="" /></td>
+                    <td><input type="text" name="ExamDate" value="" /></td>
+                    <td><input type="text" name="Details" value="" /></td>
+                    <td colspan="2">
+                      <input type="submit" value="Add" />
+                    </td>
+                  </form>
+                </tr>
               </table>
+
             {{/if}}
 
+{{!-- NURSE --}}
             {{#if nurse}}
               <table>
                 <tr>
                   <th>NurseId</th>
                   <th>TreatmentId</th>
                   <th>PatientId</th>
-                  <th>Details</th>
                   <th>TreatTime</th>
+                   <th>Details</th>
                 </tr>
                 {{#each treatment}}
                   <tr>
-                    <td>{{NurseId}}</td>
-                    <td>{{TreatmentId}}</td>
-                    <td>{{PatientId}}</td>
-                    <td>{{Details}}</td>
-                    <td>{{TreatTime}}</td>
+                    <form method="post" action="/employee/updateTreatment">
+                      <td>{{NurseId}}</td>
+                      <td style="display: none"><input
+                          type="text"
+                          name="NurseId"
+                          value={{NurseId}}
+                        /></td>
+                      <td>{{TreatmentId}}</td>
+                      <td style="display: none"><input
+                          type="text"
+                          name="TreatmentId"
+                          value={{TreatmentId}}
+                        /></td>
+                      <td><input
+                          type="text"
+                          name="PatientId"
+                          value="{{PatientId}}"
+                        /></td>
+                      <td><input
+                          type="text"
+                          name="TreatTime"
+                          value="{{TreatTime}}"
+                        /></td>
+                      <td><input
+                          type="text"
+                          name="Details"
+                          value="{{Details}}"
+                        /></td>
+                      <td><input type="submit" value="Update" /></td>
+                    </form>
+                    <td>
+                      <form method="post" action="/employee/deleteTreatment">
+                        <input
+                          type="hidden"
+                          name="TreatmentId"
+                          value={{TreatmentId}}
+                        />
+                        <input type="submit" value="Delete" />
+                      </form>
+                    </form>
                   </tr>
                 {{/each}}
+                {{!-- Treatment 데이터 삽입 --}}
+                 <tr>
+                  <form method="post" action="/employee/addTreatment">
+                    <td><input type="hidden" name="NurseId" value="" /></td>
+                    <td><input
+                        type="hidden"
+                        name="TreatmentId"
+                        value=""
+                      /></td>
+                    <td><input type="text" name="PatientId" value="" /></td>
+                    <td><input type="text" name="TreatTime" value="" /></td>
+                    <td><input type="text" name="Details" value="" /></td>
+                    <td colspan="2">
+                      <input type="submit" value="Add" />
+                    </td>
+                  </form>
+                </tr>
               </table>
             {{/if}}
 

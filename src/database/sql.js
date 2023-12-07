@@ -43,7 +43,8 @@ export const selectSql = {
   },
   // 의사 -> 자신의 examination 조회, Patient 조회
   getExamination: async (data) => {
-    const sql = "SELECT * FROM Examination WHERE DoctorId = ?";
+    const sql =
+      "SELECT ExaminationId, DoctorId, PatientId,  date_format(ExamDate, '%Y-%m-%d %T') as ExamDate, Details FROM Examination WHERE DoctorId = ?";
     const [result] = await promisePool.query(sql, [data.DoctorId]);
     return result;
   },
@@ -56,7 +57,8 @@ export const selectSql = {
 
   // 간호사 -> 자신의 treatment 조회, Patient 조회
   getTreatment: async (data) => {
-    const sql = "SELECT * FROM treatment WHERE NurseId = ?";
+    const sql =
+      "SELECT TreatmentId, PatientId, NurseId, date_format(TreatTime, '%Y-%m-%d %T') as TreatTime, Details FROM treatment WHERE NurseId = ?";
     const [result] = await promisePool.query(sql, [data.NurseId]);
     return result;
   },
@@ -107,8 +109,8 @@ export const insertSql = {
   setTreatment: async (data) => {
     const sql = `insert into treatment(PatientId, NurseId, TreatTime, Details) 
         values (
-            "${data.PatientId}", ${data.NurseId}, 
-            "${data.ExamDate}", "${data.Details}"
+            "${data.PatientId}", "${data.NurseId}", 
+            "${data.TreatTime}", "${data.Details}"
         )`;
     console.log(data);
     await promisePool.query(sql);
@@ -163,10 +165,10 @@ export const updateSql = {
     console.log(data);
     const sql = `
             UPDATE treatment
-            SET TreatmentId = ${data.Id},PatientId = "${data.PatientId}"
+            SET TreatmentId = ${data.TreatmentId}, PatientId = "${data.PatientId}",
             NurseId = "${data.NurseId}", 
             TreatTime = "${data.TreatTime}", Details = "${data.Details}"
-            WHERE TreatmentId = ${data.Id}`;
+            WHERE TreatmentId = ${data.TreatmentId}`;
     console.log(sql);
     await promisePool.query(sql);
   },
@@ -191,14 +193,14 @@ export const deleteSql = {
   deleteExamination: async (data) => {
     console.log(data);
     const sql = `
-        delete * from Examination where ExaminationId = ${data.ExaminationId}
+        delete from Examination where ExaminationId = ${data.ExaminationId}
         `;
     await promisePool.query(sql);
   },
   deleteTreatment: async (data) => {
     console.log(data);
     const sql = `
-        delete * from Treatment where TreatmentId = ${data.TreatmentId}
+        delete from Treatment where TreatmentId = ${data.TreatmentId}
         `;
     await promisePool.query(sql);
   },
