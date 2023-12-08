@@ -14,11 +14,11 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/bootstrap-icons.css" rel="stylesheet" />
-    <link href="css/owl.carousel.min.css" rel="stylesheet" />
-    <link href="css/owl.theme.default.min.css" rel="stylesheet" />
-    <link href="css/templatemo-medic-care.css" rel="stylesheet" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="/css/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="/css/templatemo-medic-care.css" rel="stylesheet" />
     <!-- TemplateMo 566 Medic Care -->
   </head>
 
@@ -49,7 +49,7 @@
             </header>
 
             <h2>{{title1}}</h2>
-{{!-- Doctor table !!  --}}
+            {{! Doctor table !! }}
             {{#if doctor}}
               <table>
                 <tr>
@@ -59,8 +59,10 @@
                   <th>PatientName</th>
                   <th>ExamDate</th>
                   <th>Details</th>
+                  <th></th>
+                  <th></th>
                 </tr>
-                {{!-- Exmaination Update --}}
+                {{! Exmaination Update }}
                 {{#each examination}}
                   <tr>
                     <form method="post" action="/employee/updateExamination">
@@ -81,7 +83,7 @@
                           name="PatientId"
                           value="{{PatientId}}"
                         /></td>
-                        <td>{{PatientName}}</td>
+                      <td>{{PatientName}}</td>
                       <td><input
                           type="text"
                           name="ExamDate"
@@ -94,6 +96,7 @@
                         /></td>
                       <td><input type="submit" value="Update" /></td>
                     </form>
+                    {{! Delete Examination }}
                     <td>
                       <form method="post" action="/employee/deleteExamination">
                         <input
@@ -107,28 +110,25 @@
                   </tr>
                 {{/each}}
                 <tr>
-                  {{!-- Examination 추가 (Add) --}}
+                  {{! Examination 추가 (Add) }}
                   <form method="post" action="/employee/addExamination">
-                  <td><input
+                    <td><input
                         type="hidden"
                         name="ExaminationId"
                         value=""
                       /></td>
                     <td><input type="hidden" name="DoctorId" value="" /></td>
                     <td><input type="text" name="PatientId" value="" /></td>
-                    <td><input type="hidden" name="PatientName" vlalue=""/></td>
+                    <td><input type="hidden" name="PatientName" value="" /></td>
                     <td><input type="text" name="ExamDate" value="" /></td>
                     <td><input type="text" name="Details" value="" /></td>
-                    <td colspan="2">
-                      <input type="submit" value="Add" />
-                    </td>
+                    <td colspan="2"><input type="submit" value="Add" /></td>
                   </form>
                 </tr>
               </table>
-
             {{/if}}
 
-{{!-- NURSE --}}
+            {{! NURSE }}
             {{#if nurse}}
               <table>
                 <tr>
@@ -137,11 +137,13 @@
                   <th>PatientId</th>
                   <th>PatientName</th>
                   <th>TreatTime</th>
-                   <th>Details</th>
+                  <th>Details</th>
+                  <th></th>
+                  <th></th>
                 </tr>
                 {{#each treatment}}
                   <tr>
-                    {{!-- Treatment Table 정보 수정 (Update) --}}
+                    {{! Treatment Table 정보 수정 (Update) }}
                     <form method="post" action="/employee/updateTreatment">
                       <td>{{TreatmentId}}</td>
                       <td style="display: none"><input
@@ -160,7 +162,7 @@
                           name="PatientId"
                           value="{{PatientId}}"
                         /></td>
-                        <td>{{PatientName}}</td>
+                      <td>{{PatientName}}</td>
                       <td><input
                           type="text"
                           name="TreatTime"
@@ -182,40 +184,28 @@
                         />
                         <input type="submit" value="Delete" />
                       </form>
-                    </form>
+                    </td>
                   </tr>
                 {{/each}}
-                {{!-- Treatment 데이터 삽입 --}}
-                 <tr>
+                {{! Treatment 데이터 삽입 }}
+                <tr>
                   <form method="post" action="/employee/addTreatment">
                     <td><input type="hidden" name="NurseId" value="" /></td>
-                    <td><input
-                        type="hidden"
-                        name="TreatmentId"
-                        value=""
-                      /></td>
+                    <td><input type="hidden" name="TreatmentId" value="" /></td>
                     <td><input type="text" name="PatientId" value="" /></td>
-                    <td><input type="hidden" name="PatientName" vlalue=""/></td>
+                    <td><input type="hidden" name="PatientName" value="" /></td>
                     <td><input type="text" name="TreatTime" value="" /></td>
                     <td><input type="text" name="Details" value="" /></td>
-                    <td colspan="2">
-                      <input type="submit" value="Add" />
-                    </td>
+                    <td colspan="2"><input type="submit" value="Add" /></td>
                   </form>
                 </tr>
               </table>
             {{/if}}
           </div>
 
-{{!-- Patient Table --}}
+          {{! Patient Table }}
           <div class="row">
             <h2>{{title2}}</h2>
-            <div class="searchBox">
-    <label>
-    Search: <input type="text" id="search" placeholder="Enter the Patine Name" />
-    </label>
-    <button onclick="filter()">Search</button>
-  </div>
             <table>
               <tr>
                 <td>PatientId</td>
@@ -231,7 +221,7 @@
                 <td>PhoneNumber</td>
               </tr>
               {{#each patient}}
-                <tr class="listInner"> 
+                <tr>
                   <td>{{PatientId}}</td>
                   <td>{{DoctorId}}</td>
                   <td>{{NurseId}}</td>
@@ -247,35 +237,82 @@
               {{/each}}
             </table>
           </div>
+
+          <div class="row">
+            <h2>
+              Patient Search
+            </h2>
+            <table>
+              {{! Search }}
+              <tr>
+                <td>Column</td>
+                <td>Value</td>
+                <td></td>
+                <!-- 추가: 검색 버튼을 레이아웃에 맞게 정렬하기 위한 빈 셀 -->
+              </tr>
+              <form method="post" action="/employee/searchPatient">
+                <td><input type="text" name="col" value="" /></td>
+                <td><input type="text" name="value" value="" /></td>
+                <td><input type="submit" value="Search" /></td>
+              </form>
+            </table>
+          </div>
+
+          {{! Display search results }}
+          <!-- searchResults.hbs -->
+          {{#if searchPatients}}
+            <div class="row">
+              <h2>
+                Results
+              </h2>
+              <table>
+                <tr>
+                  <td>PatientId</td>
+                  <td>DoctorId</td>
+                  <td>NurseId</td>
+                  <td>Name</td>
+                  <td>SocialSecurityNum</td>
+                  <td>Gender</td>
+                  <td>Address</td>
+                  <td>BloodType</td>
+                  <td>Height</td>
+                  <td>Weight</td>
+                  <td>PhoneNumber</td>
+                </tr>
+                {{#each searchPatients}}
+                  <tr>
+                    <td>{{PatientId}}</td>
+                    <td>{{DoctorId}}</td>
+                    <td>{{NurseId}}</td>
+                    <td>{{Name}}</td>
+                    <td>{{SocialSecurityNum}}</td>
+                    <td>{{Gender}}</td>
+                    <td>{{Address}}</td>
+                    <td>{{BloodType}}</td>
+                    <td>{{Height}}</td>
+                    <td>{{Weight}}</td>
+                    <td>{{PhoneNumber}}</td>
+                  </tr>
+                {{/each}}
+              </table>
+            </div>
+          {{else}}
+            <div class="row">
+              <p>No results found.</p>
+            </div>
+          {{/if}}
+
         </div>
       </section>
     </main>
 
     <!-- JAVASCRIPT FILES -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/scrollspy.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/scrollspy.min.js"></script>
+    <script src="/js/custom.js"></script>
     <!-- TemplateMo 566 Medic Care -->
-
-    <script>
-  function filter() {
-    let search = document.getElementById("search").value.toLowerCase();
-    let listInner = document.getElementsByClassName("listInner");
-
-    for (let i = 0; i < listInner.length; i++) {
-      let patientName = listInner[i].getElementsByTagName("td")[3].innerText.toLowerCase();
-
-      if (patientName.indexOf(search) != -1) {
-        listInner[i].style.display = "table-row";
-      } else {
-        listInner[i].style.display = "none";
-      }
-    }
-  }
-</script>
-
   </body>
 
 </html>

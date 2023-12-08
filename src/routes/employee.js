@@ -134,4 +134,55 @@ router.post("/deleteTreatment", async (req, res) => {
   }
 });
 
+router.post("/searchPatient", async (req, res) => {
+  try {
+    const data = req.body;
+    const searchPatients = await selectSql.getPatientByRequest(data);
+
+    if (req.session.user.role == "Doctor") {
+      const doctor = await selectSql.getDoctor();
+      const examination = await selectSql.getExamination({
+        DoctorId: req.session.userId,
+      });
+      const patient = await selectSql.getPatientForDoctor({
+        DoctorId: req.session.userId,
+      });
+
+      console.log(req.session.userId);
+
+      res.render("employee", {
+        title: "Doctor",
+        title1: "Examination",
+        title2: "Patient",
+        doctor,
+        examination,
+        patient,
+        searchPatients,
+      });
+    } else if (req.session.user.role == "Nurse") {
+      const nurse = await selectSql.getNurse();
+      const treatment = await selectSql.getTreatment({
+        NurseId: req.session.userId,
+      });
+      const patient = await selectSql.getPatientForNurse({
+        NurseId: req.session.userId,
+      });
+
+      console.log(req.session.userId);
+
+      res.render("employee", {
+        title: "Nurse",
+        title1: "Treatment",
+        title2: "Patient",
+        nurse,
+        treatment,
+        patient,
+        searchPatients,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 module.exports = router;

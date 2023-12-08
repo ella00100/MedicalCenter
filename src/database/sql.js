@@ -21,18 +21,12 @@ export const selectSql = {
     return result;
   },
   getDoctor: async () => {
-    const sql = `select D.DoctorId, D.DepartmentId, M.Name As Department, D.Name, D.Address, D.PhoneNumber, D.Password 
-        from Doctor D 
-        join MedicalSpecialty M 
-        on D.DepartmentId = M.DepartmentId`;
+    const sql = `SELECT * FROM DoctorView;`;
     const [result] = await promisePool.query(sql);
     return result;
   },
   getNurse: async () => {
-    const sql = `select N.NurseId, N.DepartmentId, M.Name As Department, N.Name, N.Address, N.PhoneNumber, N.Password
-        from Nurse N 
-        join MedicalSpecialty M 
-        on N.DepartmentId = M.DepartmentId`;
+    const sql = `SELECT * FROM NurseView;`;
     const [result] = await promisePool.query(sql);
     return result;
   },
@@ -69,9 +63,15 @@ export const selectSql = {
 
   // 환자 -> 예약 조회
   getReservation: async (data) => {
-    const sql = `SELECT * FROM ReservationView WHERE PatientId ="${data.PatientId}"
-  ORDER BY ReserveDate`;
+    const sql = `SELECT * FROM ReservationView WHERE PatientId ="${data.PatientId}" ORDER BY ReserveDate`;
     const [result] = await promisePool.query(sql);
+    return result;
+  },
+
+  // 조건에 맞는 환자 검색
+  getPatientByRequest: async (data) => {
+    let sql = `SELECT * FROM Patient WHERE ${data.col} = ?`;
+    const [result] = await promisePool.query(sql, [data.value]);
     return result;
   },
 };
