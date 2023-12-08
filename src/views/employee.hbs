@@ -41,7 +41,7 @@
         </div>
       </nav>
 
-      <section class="hero" id="hero">
+      <section>
         <div class="container">
           <div class="row">
             <header>
@@ -49,36 +49,39 @@
             </header>
 
             <h2>{{title1}}</h2>
-
+{{!-- Doctor table !!  --}}
             {{#if doctor}}
               <table>
                 <tr>
+                  <th>Id</th>
                   <th>DoctorId</th>
-                  <th>ExaminationId</th>
                   <th>PatientId</th>
+                  <th>PatientName</th>
                   <th>ExamDate</th>
                   <th>Details</th>
                 </tr>
+                {{!-- Exmaination Update --}}
                 {{#each examination}}
                   <tr>
                     <form method="post" action="/employee/updateExamination">
-                      <td>{{DoctorId}}</td>
-                      <td style="display: none"><input
-                          type="text"
-                          name="DoctorId"
-                          value={{DoctorId}}
-                        /></td>
                       <td>{{ExaminationId}}</td>
                       <td style="display: none"><input
                           type="text"
                           name="ExaminationId"
                           value={{ExaminationId}}
                         /></td>
+                      <td>{{DoctorId}}</td>
+                      <td style="display: none"><input
+                          type="text"
+                          name="DoctorId"
+                          value={{DoctorId}}
+                        /></td>
                       <td><input
                           type="text"
                           name="PatientId"
                           value="{{PatientId}}"
                         /></td>
+                        <td>{{PatientName}}</td>
                       <td><input
                           type="text"
                           name="ExamDate"
@@ -104,14 +107,16 @@
                   </tr>
                 {{/each}}
                 <tr>
+                  {{!-- Examination 추가 (Add) --}}
                   <form method="post" action="/employee/addExamination">
-                    <td><input type="hidden" name="DoctorId" value="" /></td>
-                    <td><input
+                  <td><input
                         type="hidden"
                         name="ExaminationId"
                         value=""
                       /></td>
+                    <td><input type="hidden" name="DoctorId" value="" /></td>
                     <td><input type="text" name="PatientId" value="" /></td>
+                    <td><input type="hidden" name="PatientName" vlalue=""/></td>
                     <td><input type="text" name="ExamDate" value="" /></td>
                     <td><input type="text" name="Details" value="" /></td>
                     <td colspan="2">
@@ -127,9 +132,10 @@
             {{#if nurse}}
               <table>
                 <tr>
+                  <th>Id</th>
                   <th>NurseId</th>
-                  <th>TreatmentId</th>
                   <th>PatientId</th>
+                  <th>PatientName</th>
                   <th>TreatTime</th>
                    <th>Details</th>
                 </tr>
@@ -137,23 +143,24 @@
                   <tr>
                     {{!-- Treatment Table 정보 수정 (Update) --}}
                     <form method="post" action="/employee/updateTreatment">
-                      <td>{{NurseId}}</td>
-                      <td style="display: none"><input
-                          type="text"
-                          name="NurseId"
-                          value={{NurseId}}
-                        /></td>
                       <td>{{TreatmentId}}</td>
                       <td style="display: none"><input
                           type="text"
                           name="TreatmentId"
                           value={{TreatmentId}}
                         /></td>
+                      <td>{{NurseId}}</td>
+                      <td style="display: none"><input
+                          type="text"
+                          name="NurseId"
+                          value={{NurseId}}
+                        /></td>
                       <td><input
                           type="text"
                           name="PatientId"
                           value="{{PatientId}}"
                         /></td>
+                        <td>{{PatientName}}</td>
                       <td><input
                           type="text"
                           name="TreatTime"
@@ -188,6 +195,7 @@
                         value=""
                       /></td>
                     <td><input type="text" name="PatientId" value="" /></td>
+                    <td><input type="hidden" name="PatientName" vlalue=""/></td>
                     <td><input type="text" name="TreatTime" value="" /></td>
                     <td><input type="text" name="Details" value="" /></td>
                     <td colspan="2">

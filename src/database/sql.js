@@ -43,8 +43,10 @@ export const selectSql = {
   },
   // 의사 -> 자신의 examination 조회, Patient 조회
   getExamination: async (data) => {
-    const sql =
-      "SELECT ExaminationId, DoctorId, PatientId,  date_format(ExamDate, '%Y-%m-%d %T') as ExamDate, Details FROM Examination WHERE DoctorId = ?";
+    const sql = `SELECT E.ExaminationId, E.DoctorId, E.PatientId, P.Name as PatientName, DATE_FORMAT(E.ExamDate, '%Y-%m-%d %T') as ExamDate, E.Details 
+    FROM Examination E 
+    JOIN Patient P ON E.PatientId = P.PatientId
+    WHERE E.DoctorId = ?`;
     const [result] = await promisePool.query(sql, [data.DoctorId]);
     return result;
   },
@@ -57,8 +59,10 @@ export const selectSql = {
 
   // 간호사 -> 자신의 treatment 조회, Patient 조회
   getTreatment: async (data) => {
-    const sql =
-      "SELECT TreatmentId, PatientId, NurseId, date_format(TreatTime, '%Y-%m-%d %T') as TreatTime, Details FROM treatment WHERE NurseId = ?";
+    const sql = `SELECT T.TreatmentId, T.PatientId, P.Name as PatientName, T.NurseId, date_format(T.TreatTime, '%Y-%m-%d %T') as TreatTime, T.Details 
+      FROM treatment T
+      JOIN Patient P ON T.PatientId = P.PatientId
+      WHERE T.NurseId = ?`;
     const [result] = await promisePool.query(sql, [data.NurseId]);
     return result;
   },
