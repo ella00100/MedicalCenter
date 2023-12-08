@@ -43,10 +43,7 @@ export const selectSql = {
   },
   // 의사 -> 자신의 examination 조회, Patient 조회
   getExamination: async (data) => {
-    const sql = `SELECT E.ExaminationId, E.DoctorId, E.PatientId, P.Name as PatientName, DATE_FORMAT(E.ExamDate, '%Y-%m-%d %T') as ExamDate, E.Details 
-    FROM Examination E 
-    JOIN Patient P ON E.PatientId = P.PatientId
-    WHERE E.DoctorId = ?`;
+    const sql = `SELECT * FROM ExaminationView WHERE DoctorId = ?`;
     const [result] = await promisePool.query(sql, [data.DoctorId]);
     return result;
   },
@@ -59,10 +56,7 @@ export const selectSql = {
 
   // 간호사 -> 자신의 treatment 조회, Patient 조회
   getTreatment: async (data) => {
-    const sql = `SELECT T.TreatmentId, T.PatientId, P.Name as PatientName, T.NurseId, date_format(T.TreatTime, '%Y-%m-%d %T') as TreatTime, T.Details 
-      FROM treatment T
-      JOIN Patient P ON T.PatientId = P.PatientId
-      WHERE T.NurseId = ?`;
+    const sql = `SELECT * FROM TreatmentView WHERE NurseId = ?`;
     const [result] = await promisePool.query(sql, [data.NurseId]);
     return result;
   },
@@ -75,12 +69,8 @@ export const selectSql = {
 
   // 환자 -> 예약 조회
   getReservation: async (data) => {
-    const sql = `
-  SELECT R.PatientId, R.DepartmentId, M.Name AS DepartmentName, R.ReserveNum, DATE_FORMAT(R.ReserveDate, '%Y-%m-%d %T') AS ReserveDate
-  FROM Reservation R 
-  JOIN MedicalSpecialty M ON R.DepartmentId = M.DepartmentId
-  WHERE R.PatientId = "${data.PatientId}"
-  ORDER BY R.ReserveDate ASC`;
+    const sql = `SELECT * FROM ReservationView WHERE PatientId ="${data.PatientId}"
+  ORDER BY ReserveDate`;
     const [result] = await promisePool.query(sql);
     return result;
   },
