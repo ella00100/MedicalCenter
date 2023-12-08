@@ -4,7 +4,12 @@ import { selectSql, insertSql, updateSql, deleteSql } from "../database/sql";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  if (req.session.user.role == "Doctor") {
+  if (
+    !req.session.user ||
+    (req.session.user.role !== "Doctor" && req.session.user.role !== "Nurse")
+  ) {
+    return res.redirect("/");
+  } else if (req.session.user.role == "Doctor") {
     const doctor = await selectSql.getDoctor();
     const examination = await selectSql.getExamination({
       DoctorId: req.session.userId,

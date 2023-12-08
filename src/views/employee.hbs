@@ -205,11 +205,17 @@
                 </tr>
               </table>
             {{/if}}
-
           </div>
+
+{{!-- Patient Table --}}
           <div class="row">
             <h2>{{title2}}</h2>
-            
+            <div class="searchBox">
+    <label>
+    Search: <input type="text" id="search" placeholder="Enter the Patine Name" />
+    </label>
+    <button onclick="filter()">Search</button>
+  </div>
             <table>
               <tr>
                 <td>PatientId</td>
@@ -225,7 +231,7 @@
                 <td>PhoneNumber</td>
               </tr>
               {{#each patient}}
-                <tr>
+                <tr class="listInner"> 
                   <td>{{PatientId}}</td>
                   <td>{{DoctorId}}</td>
                   <td>{{NurseId}}</td>
@@ -252,6 +258,24 @@
     <script src="js/scrollspy.min.js"></script>
     <script src="js/custom.js"></script>
     <!-- TemplateMo 566 Medic Care -->
+
+    <script>
+  function filter() {
+    let search = document.getElementById("search").value.toLowerCase();
+    let listInner = document.getElementsByClassName("listInner");
+
+    for (let i = 0; i < listInner.length; i++) {
+      let patientName = listInner[i].getElementsByTagName("td")[3].innerText.toLowerCase();
+
+      if (patientName.indexOf(search) != -1) {
+        listInner[i].style.display = "table-row";
+      } else {
+        listInner[i].style.display = "none";
+      }
+    }
+  }
+</script>
+
   </body>
 
 </html>

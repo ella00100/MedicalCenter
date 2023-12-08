@@ -64,4 +64,4 @@ router.post("/deleteReservation", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
