@@ -37,12 +37,26 @@
                 </div>
             </div>
         </nav>
+       
+        <section class="gallery">
+                <div class="container">
+                    <div class="row">
+                        <div style="padding: 100px 0 30px 0">
+                             <h1>{{ title }}</h1>
+                        </div>
+                        <div class="col-lg-6 col-6 ps-0">
+                            <img src="images/slider/header-page.jpg" style="width:1400px">
+                        </div>
 
-        <section class="section-padding" id="about">
-            <div class="container">
-                <div class="row">
-                    <h1>{{ title }}</h1>
-                    <div class="col-lg-6 col-md-6 col-12">
+                    </div>
+                </div>
+        </section>
+
+            <section class="section-padding" id="booking">
+                <div class="container">
+                    <div class="row">
+                    
+                        <div class="col-lg-8 col-12 mx-auto">
                         {{!-- Doctor --}}
                         <h2>{{ title1 }}</h2>
                         <table>
@@ -53,6 +67,8 @@
                                 <td>Name</td>
                                 <td>Address</td>
                                 <td>PhoneNumber</td>
+                                                            <td></td>
+                            <td></td>
                             </tr>
                             {{#each doctor}}
                             {{!-- Docotr Update --}}
@@ -78,50 +94,54 @@
                                 </td>
                             </tr>
                             {{/each}}
-{{!-- Doctor Add --}}
+                            {{!-- Doctor Add --}}
                             <tr>
-                <form method="post" action="/manager/addDoctor">
-                    <td><input type="text" name="DoctorId" value=""></td>
-                    <td><input type="text" name="DepartmentId" value=""></td>
-                    <td><input type="hidden" name="Department" value=""></td>
-                    <td><input type="text" name="Name" value=""></td>
-                    <td><input type="text" name="Address" value=""></td>
-                    <td><input type="text" name="PhoneNumber" value=""></td>
-                    <td colspan="2">
-                        <input type="submit" value="Add">
-                    </td>
-                </form>
-            </tr>
-                        </table>
-                    </div>                 
-                </div>
-{{!-- Nurse --}}
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <h2>{{ title2 }}</h2>
-                        <table>
-                            <tr>
-                                <td>NurseId</td>
-                                <td>DepartmentId</td>
-                                <td>Department</td>
-                                <td>Name</td>
-                                <td>Address</td>
-                                <td>PhoneNumber</td>
-                            </tr>
-                            {{#each nurse}}
-                            {{!--Nurse Update  --}}
-                            <tr>
-                                <form method="post" action="/manager/updateNurse">
-                                <td>{{NurseId}}</td>
-                                <td style="display: none"><input type="text" name="NurseId" value={{NurseId}}></td>
-                                <td><input type="text" name="DepartmentId" value={{DepartmentId}}></td>
-                                <td>{{Department}}</td>
-                                <td><input type="text" name="Name" value="{{Name}}"></td>
-                                <td><input type="text" name="Address" value="{{Address}}"></td>
-                                <td><input type="text" name="PhoneNumber" value="{{PhoneNumber}}"></td>
-                                <td>
-                                        <input type="submit" value="Update">
+                            <form method="post" action="/manager/addDoctor">
+                                <td><input type="text" name="DoctorId" value=""></td>
+                                <td><input type="text" name="DepartmentId" value=""></td>
+                                <td><input type="hidden" name="Department" value=""></td>
+                                <td><input type="text" name="Name" value=""></td>
+                                <td><input type="text" name="Address" value=""></td>
+                                <td><input type="text" name="PhoneNumber" value=""></td>
+                                <td colspan="2">
+                                    <input type="submit" value="Add">
                                 </td>
+                            </form>
+                        </tr>
+                    </table>
+                </div>                 
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="booking">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-12 mx-auto">
+                 {{!-- Nurse --}}
+                    <h2>{{ title2 }}</h2>
+                    <table>
+                        <tr>
+                            <td>NurseId</td>
+                            <td>DepartmentId</td>
+                            <td>Department</td>
+                            <td>Name</td>
+                            <td>Address</td>
+                            <td>PhoneNumber</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {{#each nurse}}
+                        {{!--Nurse Update  --}}                            <tr>
+                        <form method="post" action="/manager/updateNurse">
+                            <td>{{NurseId}}</td>
+                            <td style="display: none"><input type="text" name="NurseId" value={{NurseId}}></td>
+                            <td><input type="text" name="DepartmentId" value={{DepartmentId}}></td>
+                            <td>{{Department}}</td>
+                            <td><input type="text" name="Name" value="{{Name}}"></td>
+                            <td><input type="text" name="Address" value="{{Address}}"></td>
+                            <td><input type="text" name="PhoneNumber" value="{{PhoneNumber}}"></td>
+                            <td><input type="submit" value="Update"></td>
                                 </form>
                                 {{!-- Nurse delete --}}
                                 <td>
@@ -133,19 +153,19 @@
                             </tr>
                             {{/each}}
                             {{!-- Nurse Add --}}
-                   <tr>
-                <form method="post" action="/manager/addNurse">
-                    <td><input type="text" name="NurseId" value=""></td>
-                    <td><input type="text" name="DepartmentId" value=""></td>
-                    <td><input type="hidden" name="Department" value=""></td>
-                    <td><input type="text" name="Name" value=""></td>
-                    <td><input type="text" name="Address" value=""></td>
-                    <td><input type="text" name="PhoneNumber" value=""></td>
-                    <td colspan="2">
-                        <input type="submit" value="Add">
-                    </td>
-                </form>
-            </tr>
+                            <tr>
+                                <form method="post" action="/manager/addNurse">
+                                    <td><input type="text" name="NurseId" value=""></td>
+                                    <td><input type="text" name="DepartmentId" value=""></td>
+                                    <td><input type="hidden" name="Department" value=""></td>
+                                    <td><input type="text" name="Name" value=""></td>
+                                    <td><input type="text" name="Address" value=""></td>
+                                    <td><input type="text" name="PhoneNumber" value=""></td>
+                                    <td colspan="2">
+                                        <input type="submit" value="Add">
+                                    </td>
+                                </form>
+                            </tr>
                         </table>
                     </div>
                 </div>

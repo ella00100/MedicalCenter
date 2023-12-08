@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     const nurse = await selectSql.getNurse();
 
     res.render("manager", {
-      title: "Medicalist",
+      title: "Management Medicalist",
       title1: "Doctor",
       title2: "Nurse",
       doctor,

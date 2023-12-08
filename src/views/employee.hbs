@@ -44,13 +44,17 @@
       <section>
         <div class="container">
           <div class="row">
-            <header>
-              <h1>{{title}}</h1>
-            </header>
-
-            <h2>{{title1}}</h2>
             {{! Doctor table !! }}
             {{#if doctor}}
+              <div style="padding: 100px 0 30px 0; text-align: center;">
+                <h1>{{title}} Page</h1>
+                <img
+                  src="images/slider/doctor.jpg"
+                  style="width: 50%"
+                />
+              </div>
+              <div style="margin-top: 50px">
+              <h2>{{title1}}</h2>
               <table>
                 <tr>
                   <th>Id</th>
@@ -130,6 +134,15 @@
 
             {{! NURSE }}
             {{#if nurse}}
+              <div style="padding: 100px 0 30px 0; text-align: center;">
+                <h1>{{title}} Page</h1>
+                <img
+                  src="images\gallery\nurse.jpg"
+                  style="width: 50%"
+                />
+              </div>
+              <div style="margin-top: 50px">
+              <h2>{{title1}}</h2>
               <table>
                 <tr>
                   <th>Id</th>
@@ -202,7 +215,11 @@
               </table>
             {{/if}}
           </div>
+        </div>
+      </section>
 
+      <section>
+        <div class="container" style="margin-top: 50px">
           {{! Patient Table }}
           <div class="row">
             <h2>{{title2}}</h2>
