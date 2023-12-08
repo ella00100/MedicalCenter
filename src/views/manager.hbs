@@ -43,6 +43,7 @@
                 <div class="row">
                     <h1>{{ title }}</h1>
                     <div class="col-lg-6 col-md-6 col-12">
+                        {{!-- Doctor --}}
                         <h2>{{ title1 }}</h2>
                         <table>
                             <tr>
@@ -54,6 +55,7 @@
                                 <td>PhoneNumber</td>
                             </tr>
                             {{#each doctor}}
+                            {{!-- Docotr Update --}}
                             <tr>
                             <form method="post" action="/manager/updateDoctor">
                                 <td>{{DoctorId}}</td>
@@ -68,6 +70,7 @@
                                     </form>
                                 </td>
                                 <td>
+                                    {{!-- Doctor delete --}}
                                     <form method="post" action="/manager/deleteDoctor">
                                         <input type="hidden" name="DoctorId" value={{DoctorId}}>
                                         <input type="submit" value="Delete">
@@ -75,7 +78,7 @@
                                 </td>
                             </tr>
                             {{/each}}
-
+{{!-- Doctor Add --}}
                             <tr>
                 <form method="post" action="/manager/addDoctor">
                     <td><input type="text" name="DoctorId" value=""></td>
@@ -92,7 +95,7 @@
                         </table>
                     </div>                 
                 </div>
-
+{{!-- Nurse --}}
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
                         <h2>{{ title2 }}</h2>
@@ -106,7 +109,9 @@
                                 <td>PhoneNumber</td>
                             </tr>
                             {{#each nurse}}
+                            {{!--Nurse Update  --}}
                             <tr>
+                                <form method="post" action="/manager/updateNurse">
                                 <td>{{NurseId}}</td>
                                 <td style="display: none"><input type="text" name="NurseId" value={{NurseId}}></td>
                                 <td><input type="text" name="DepartmentId" value={{DepartmentId}}></td>
@@ -115,11 +120,10 @@
                                 <td><input type="text" name="Address" value="{{Address}}"></td>
                                 <td><input type="text" name="PhoneNumber" value="{{PhoneNumber}}"></td>
                                 <td>
-                                    <form method="post" action="/manager/updateNurse">
-                                        <input type="hidden" name="NurseId" value={{NurseId}}>
                                         <input type="submit" value="Update">
-                                    </form>
                                 </td>
+                                </form>
+                                {{!-- Nurse delete --}}
                                 <td>
                                     <form method="post" action="/manager/deleteNurse">
                                         <input type="hidden" name="NurseId" value={{NurseId}}>
@@ -128,7 +132,8 @@
                                 </td>
                             </tr>
                             {{/each}}
-                                                        <tr>
+                            {{!-- Nurse Add --}}
+                   <tr>
                 <form method="post" action="/manager/addNurse">
                     <td><input type="text" name="NurseId" value=""></td>
                     <td><input type="text" name="DepartmentId" value=""></td>

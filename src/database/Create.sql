@@ -16,7 +16,8 @@ CREATE TABLE Room (
   Capacity INT NULL,
   BuildingId INT NULL,
   PRIMARY KEY (RoomId),
-  FOREIGN KEY (BuildingId) REFERENCES Building(BuildingId)
+  FOREIGN KEY (BuildingId) REFERENCES Building(BuildingId) 
+  ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- MedicalSpecialty Table: 전문 부서 정보(DepartmentId, Name, PhoneNumber)
@@ -27,6 +28,7 @@ CREATE TABLE MedicalSpecialty (
   PhoneNumber VARCHAR(45) NULL,
   PRIMARY KEY (DepartmentId),
   FOREIGN KEY(RoomId) REFERENCES Room(RoomId)
+  ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Manager (
@@ -38,6 +40,7 @@ CREATE TABLE Manager (
   Password VARCHAR(45) NULL,
   PRIMARY KEY(ManagerId),
   FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId)
+  ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Doctor Table: 의사 정보(DoctorId, DepartmentId)
@@ -50,6 +53,7 @@ CREATE TABLE Doctor (
     Password VARCHAR(45) NULL,
     PRIMARY KEY (DoctorId),
     FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Nurse Table: 간호사 정보(NurseId, DepartmentId)
@@ -62,6 +66,7 @@ CREATE TABLE Nurse (
   Password VARCHAR(45) NULL,
   PRIMARY KEY (NurseId),
   FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId)
+  ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Patient Table: 환자 정보(PatientId, DoctorId, NurseId)
@@ -79,8 +84,10 @@ CREATE TABLE Patient (
   PhoneNumber VARCHAR(45) NULL,
   Password VARCHAR(45) NULL,
   PRIMARY KEY (PatientId),
-  FOREIGN KEY (DoctorId) REFERENCES Doctor(DoctorId),
+  FOREIGN KEY (DoctorId) REFERENCES Doctor(DoctorId)
+  ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (NurseId) REFERENCES Nurse(NurseId)
+  ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Examination Table: 검사 정보(ExaminationId, DoctorId, PatientId)
@@ -91,8 +98,8 @@ CREATE TABLE Examination (
   DoctorId VARCHAR(30) NULL,
   PatientId VARCHAR(30) NULL,
   PRIMARY KEY (ExaminationId),
-  FOREIGN KEY (DoctorId) REFERENCES Doctor(DoctorId),
-  FOREIGN KEY (PatientId) REFERENCES Patient(PatientId)
+  FOREIGN KEY (DoctorId) REFERENCES Doctor(DoctorId) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (PatientId) REFERENCES Patient(PatientId) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Reservation Table: 예약 정보(ReserveNum, DepartmentId, PatientId)
@@ -102,8 +109,8 @@ CREATE TABLE Reservation (
   DepartmentId INT NULL,
   PatientId VARCHAR(30) NULL,
   PRIMARY KEY (ReserveNum),
-  FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId),
-  FOREIGN KEY (PatientId) REFERENCES Patient(PatientId)
+  FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (PatientId) REFERENCES Patient(PatientId)ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Treatment Table: 치료 정보(TreatmentId, PatientId, NurseId)
@@ -114,8 +121,8 @@ CREATE TABLE Treatment (
   TreatTime DATETIME,
   Details VARCHAR(45) NULL,
   PRIMARY KEY (TreatmentId),
-  FOREIGN KEY (PatientId) REFERENCES Patient(PatientId),
-  FOREIGN KEY (NurseId) REFERENCES Nurse(NurseId)
+  FOREIGN KEY (PatientId) REFERENCES Patient(PatientId) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (NurseId) REFERENCES Nurse(NurseId) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Inpatient Table: 입원 정보(InpatientId, RoomId, AdmissionDate, DischargeDate, PatientId)
@@ -126,6 +133,6 @@ CREATE TABLE Inpatient (
   DischargeDate DATETIME NULL,
   PatientId VARCHAR(30) NOT NULL,
   PRIMARY KEY (InpatientId),
-  FOREIGN KEY (RoomId) REFERENCES Room(RoomId),
-  FOREIGN KEY (PatientId) REFERENCES Patient(PatientId)
+  FOREIGN KEY (RoomId) REFERENCES Room(RoomId) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (PatientId) REFERENCES Patient(PatientId) ON UPDATE CASCADE ON DELETE CASCADE
 );
