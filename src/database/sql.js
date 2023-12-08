@@ -75,10 +75,12 @@ export const selectSql = {
 
   // 환자 -> 예약 조회
   getReservation: async (data) => {
-    const sql = `select R.PatientId, R.DepartmentId,  M.Name As Department, R.ReserveNum, date_format(R.ReserveDate, '%Y-%m-%d %T') as ReserveDate
-      from Reservation R 
-      join MedicalSpecialty M 
-        where PatientId = "${data.PatientId}"`;
+    const sql = `
+  SELECT R.PatientId, R.DepartmentId, M.Name AS DepartmentName, R.ReserveNum, DATE_FORMAT(R.ReserveDate, '%Y-%m-%d %T') AS ReserveDate
+  FROM Reservation R 
+  JOIN MedicalSpecialty M ON R.DepartmentId = M.DepartmentId
+  WHERE R.PatientId = "${data.PatientId}"
+  ORDER BY R.ReserveDate ASC`;
     const [result] = await promisePool.query(sql);
     return result;
   },
@@ -185,7 +187,7 @@ export const updateSql = {
     SET ReserveDate = "${data.ReserveDate}",
      DepartmentId = "${data.DepartmentId}", 
      PatientId = "${data.PatientId}"
-     WHERE ReservationId = ${data.ReservationId}`;
+     WHERE ReserveNum = ${data.ReserveNum}`;
     console.log(data);
     await promisePool.query(sql);
   },
@@ -224,7 +226,7 @@ export const deleteSql = {
   deleteReservation: async (data) => {
     console.log(data);
     const sql = `
-        delete from Reservation where ReservationId = ${data.ReservationId}
+        delete from Reservation where ReserveNum = ${data.ReserveNum}
         `;
     await promisePool.query(sql);
   },

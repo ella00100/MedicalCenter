@@ -26,7 +26,14 @@ router.get("/", async (req, res) => {
 
 router.post("/addReservation", async (req, res) => {
   try {
-    const data = req.body;
+    const vars = req.body;
+
+    const data = {
+      PatientId: req.session.userId,
+      DepartmentId: vars.DepartmentId,
+      ReserveDate: vars.ReserveDate,
+      Details: vars.Details,
+    };
     await insertSql.setReservation(data);
     res.redirect("/patient");
   } catch (error) {

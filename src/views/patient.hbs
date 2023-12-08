@@ -48,7 +48,7 @@
                             <tr>
                                 <td>PatientId</td>
                                 <td>DepartmentId</td>
-                                <td>ReserveNum</td>
+                                <td>Department</td>
                                 <td>ReserveDate</td>
                 
                             </tr>
@@ -58,7 +58,7 @@
                                 <td>{{PatientId}}</td>
                                 <td style="display: none"><input type="text" name="PatientId" value={{PatientId}}></td>
                                 <td><input type="text" name="DepartmentId" value={{DepartmentId}}></td>
-                                <td>{{ReserveNum}}</td>
+                                <td>{{DepartmentName}}</td>
                                 <td style="display: none"><input type="text" name="ReserveNum" value="{{ReserveNum}}"></td>
                                 <td><input type="text" name="ReserveDate" value="{{ReserveDate}}"></td>
                                 <td>
@@ -73,12 +73,12 @@
                                 </td>
                             </tr>
                             {{/each}}
-
+{{!-- Reservation Add --}}
                             <tr>
                 <form method="post" action="/patient/addReservation">
-                    <td><input type="text" name="PatientId" value=""></td>
+                    <td><input type="hidden" name="PatientId" value=""></td>
                     <td><input type="text" name="DepartmentId" value=""></td>
-                    <td><input type="text" name="ReserveNum" value=""></td>
+                    <td><input type="hidden" name="DepartmentName" value=""></td>
                     <td><input type="text" name="ReserveDate" value=""></td>
                     <td colspan="2">
                         <input type="submit" value="Add">
