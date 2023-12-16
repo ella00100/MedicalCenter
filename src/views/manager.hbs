@@ -47,16 +47,13 @@
                         <div class="col-lg-6 col-6 ps-0">
                             <img src="images/slider/header-page.jpg" style="width:1400px">
                         </div>
-
                     </div>
                 </div>
         </section>
 
-            <section class="section-padding" id="booking">
-                <div class="container">
-                    <div class="row">
-                    
-                        <div class="col-lg-8 col-12 mx-auto">
+        <section class="section-padding" id="booking">
+             <div class="container">
+                <div class="row">
                         {{!-- Doctor --}}
                         <h2>{{ title1 }}</h2>
                         <table>
@@ -67,8 +64,8 @@
                                 <td>Name</td>
                                 <td>Address</td>
                                 <td>PhoneNumber</td>
-                                                            <td></td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             {{#each doctor}}
                             {{!-- Docotr Update --}}
@@ -96,28 +93,24 @@
                             {{/each}}
                             {{!-- Doctor Add --}}
                             <tr>
-                            <form method="post" action="/manager/addDoctor">
-                                <td><input type="text" name="DoctorId" value=""></td>
-                                <td><input type="text" name="DepartmentId" value=""></td>
-                                <td><input type="hidden" name="Department" value=""></td>
-                                <td><input type="text" name="Name" value=""></td>
-                                <td><input type="text" name="Address" value=""></td>
-                                <td><input type="text" name="PhoneNumber" value=""></td>
-                                <td colspan="2">
-                                    <input type="submit" value="Add">
-                                </td>
-                            </form>
-                        </tr>
+                                <form method="post" action="/manager/addDoctor">
+                                    <td><input type="text" name="DoctorId" value=""></td>
+                                    <td><input type="text" name="DepartmentId" value=""></td>
+                                    <td><input type="hidden" name="Department" value=""></td>
+                                    <td><input type="text" name="Name" value=""></td>
+                                    <td><input type="text" name="Address" value=""></td>
+                                    <td><input type="text" name="PhoneNumber" value=""></td>
+                                    <td colspan="2"><input type="submit" value="Add"></td>
+                                </form>
+                            </tr>
                     </table>
                 </div>                 
             </div>
-        </div>
     </section>
 
     <section class="section-padding" id="booking">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-12 mx-auto">
                  {{!-- Nurse --}}
                     <h2>{{ title2 }}</h2>
                     <table>

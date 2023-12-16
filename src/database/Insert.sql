@@ -1,9 +1,12 @@
+START TRANSACTION;
+
 INSERT INTO Building (Name) VALUES
 ('Main Hospital'),
 ('Medical Center'),
 ('Surgery Wing'),
 ('Emergency Wing'),
 ('Rehabilitation Center');
+COMMIT;
 
 INSERT INTO Room (Name, Capacity, BuildingId) VALUES
 ('101', 2, 1),
@@ -11,6 +14,7 @@ INSERT INTO Room (Name, Capacity, BuildingId) VALUES
 ('102', 1, 2),
 ('103', 3, 2),
 ('301', 5, 3);
+COMMIT;
 
 INSERT INTO MedicalSpecialty (RoomId, Name, PhoneNumber) VALUES
 (1, 'Internal Medicine', '010-7711-1189'),
@@ -18,6 +22,7 @@ INSERT INTO MedicalSpecialty (RoomId, Name, PhoneNumber) VALUES
 (3, 'Orthopedics', '010-0182-3324'),
 (4, 'Dermatology', '010-4374-0104'),
 (5, 'Ophthalmology', '010-6655-1523');
+COMMIT;
 
 INSERT INTO Manager (ManagerId, DepartmentId, Name, Address, PhoneNumber, Password) VALUES
 ('M1', 1, 'Mgr. Kim', 'Incheon', '010-1234-5678', 'pd1'),
@@ -25,6 +30,7 @@ INSERT INTO Manager (ManagerId, DepartmentId, Name, Address, PhoneNumber, Passwo
 ('M3', 3, 'Mgr. Lee', 'Gyeongi', '010-2791-2278', 'pd3'),
 ('M4', 4, 'Mgr. Jung', 'Seoul', '010-3453-4884', 'pd4'),
 ('M5', 5, 'Mgr. Choi', 'Incheon', '010-7425-6996', 'pd5');
+COMMIT;
 
 INSERT INTO Doctor (DoctorId, DepartmentId, Name, Address, PhoneNumber, Password) VALUES
 ('D1', 1, 'Dr. Lee', 'Incheon', '010-7825-6999', 'pd1'),
@@ -34,6 +40,7 @@ INSERT INTO Doctor (DoctorId, DepartmentId, Name, Address, PhoneNumber, Password
 ('D5', 3, 'Dr. Choi', 'Incheon', '010-5002-7775', 'pd5'),
 ('D6', 4, 'Dr. Jung', 'Gyeongnam', '010-6900-5587', 'pd6'),
 ('D7', 5, 'Dr. Man', 'Seoul', '010-5456-5999', 'pd7');
+COMMIT;
 
 INSERT INTO Nurse (NurseId, DepartmentId, Name, Address, PhoneNumber, Password) VALUES
 ('N1', 1, 'Nurs. Lee', 'Seoul', '010-1789-5554', 'pd1'),
@@ -43,6 +50,7 @@ INSERT INTO Nurse (NurseId, DepartmentId, Name, Address, PhoneNumber, Password) 
 ('N5', 4, 'Nurs. Jung', 'Incheon', '010-4679-4446', 'pd5'),
 ('N6', 5, 'Nurs. Choi', 'Seoul', '010-1235-4475', 'pd6'),
 ('N7', 5, 'Nurs. Wang', 'Seoul', '010-4557-7895', 'pd7');
+COMMIT;
 
 INSERT INTO Patient (PatientId, DoctorId, NurseId, Name, SocialSecurityNum, Gender, Address, BloodType, Height, Weight, PhoneNumber, Password) VALUES
 ('P1', 'D1', 'N1', 'Kim SeoYoung', 901231, 'M', 'Incheon', 'A+', 175.5, 70.2, '010-1231-1111', 'pd1'),
@@ -55,6 +63,7 @@ INSERT INTO Patient (PatientId, DoctorId, NurseId, Name, SocialSecurityNum, Gend
 ('P8', 'D1', 'N1', 'Lee GyeongA', 900432, 'F', 'Gyeongi', 'B-', 160.0, 55.5, '010-2352-1522', 'pd8'),
 ('P9', 'D4', 'N4', 'Choi SungMin', 980612, 'M', 'Incheon', 'A-', 172.3, 68.8, '010-5351-5523', 'pd9'),
 ('P10', 'D5', 'N4', 'Jung PanSuk', 950578, 'F', 'Gyeongi', 'AB+', 165.5, 58.7, '010-2354-5214', 'pd10');
+COMMIT;
 
 INSERT INTO Examination (ExamDate, Details, DoctorId, PatientId) VALUES
 ('2023-12-05 12:00:00', 'X-ray Scan', 'D1', 'P1'),
@@ -66,6 +75,7 @@ INSERT INTO Examination (ExamDate, Details, DoctorId, PatientId) VALUES
 ('2023-12-08 09:45:00', 'Ultrasound Scan', 'D3', 'P3'),
 ('2023-12-08 11:15:00', 'X-ray Scan', 'D4', 'P4'),
 ('2023-12-08 13:20:00', 'MRI Scan', 'D5', 'P5');
+COMMIT;
 
 INSERT INTO Reservation (ReserveDate, DepartmentId, PatientId) VALUES
 ('2023-12-12 10:00:00', 1, 'P1'),
@@ -75,6 +85,7 @@ INSERT INTO Reservation (ReserveDate, DepartmentId, PatientId) VALUES
 ('2023-12-17 13:20:00', 5, 'P5'),
 ('2023-12-18 09:45:00', 1, 'P1'),
 ('2023-12-30 14:10:00', 1, 'P1');
+COMMIT;
 
 INSERT INTO Treatment (PatientId, NurseId, TreatTime, Details) VALUES
 ('P1', 'N1', '2023-12-05 10:30:00', 'Wound dressing'),
@@ -85,6 +96,7 @@ INSERT INTO Treatment (PatientId, NurseId, TreatTime, Details) VALUES
 ('P3', 'N3', '2023-12-08 10:00:00', 'Physical therapy'),
 ('P4', 'N4', '2023-12-08 11:30:00', 'Injection'),
 ('P5', 'N5', '2023-12-08 13:45:00', 'Monitoring vital signs');
+COMMIT;
 
 INSERT INTO Inpatient (RoomId, AdmissionDate, DischargeDate, PatientId) VALUES
 (1, '2023-06-01 12:00:00', '2023-06-05 14:00:00', 'P1'),
@@ -92,3 +104,4 @@ INSERT INTO Inpatient (RoomId, AdmissionDate, DischargeDate, PatientId) VALUES
 (3, '2023-06-03 11:00:00', '2023-06-07 10:30:00', 'P3'),
 (4, '2023-06-04 13:00:00', '2023-06-08 12:15:00', 'P4'),
 (5, '2023-06-05 14:30:00', '2023-06-09 13:45:00', 'P5');
+COMMIT;

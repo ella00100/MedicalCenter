@@ -51,36 +51,36 @@
                <div style="margin-top: 50px">
               <h2>{{title1}}</h2>
               <table>
-                            <tr>
-                                <td>PatientId</td>
-                                <td>DepartmentId</td>
-                                <td>Department</td>
-                                <td>ReserveDate</td>
+                <tr>
+                    <td>PatientId</td>
+                    <td>DepartmentId</td>
+                    <td>Department</td>
+                    <td>ReserveDate</td>
                 
-                            </tr>
-                            {{#each reservation}}
-                            <tr>
-                            <form method="post" action="/patient/updateReservation">
-                                <td>{{PatientId}}</td>
-                                <td style="display: none"><input type="text" name="PatientId" value={{PatientId}}></td>
-                                <td><input type="text" name="DepartmentId" value={{DepartmentId}}></td>
-                                <td>{{DepartmentName}}</td>
-                                <td style="display: none"><input type="text" name="ReserveNum" value="{{ReserveNum}}"></td>
-                                <td><input type="text" name="ReserveDate" value="{{ReserveDate}}"></td>
-                                <td>
-                                        <input type="submit" value="Update">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form method="post" action="/patient/deleteReservation">
-                                        <input type="hidden" name="ReserveNum" value={{ReserveNum}}>
-                                        <input type="submit" value="Delete">
-                                    </form>
-                                </td>
-                            </tr>
-                            {{/each}}
+                </tr>
+                {{#each reservation}}
+                <tr>
+                    <form method="post" action="/patient/updateReservation">
+                        <td>{{PatientId}}</td>
+                        <td style="display: none"><input type="text" name="PatientId" value={{PatientId}}></td>
+                        <td><input type="text" name="DepartmentId" value={{DepartmentId}}></td>
+                        <td>{{DepartmentName}}</td>
+                        <td style="display: none"><input type="text" name="ReserveNum" value="{{ReserveNum}}"></td>
+                        <td><input type="text" name="ReserveDate" value="{{ReserveDate}}"></td>
+                        <td>
+                            <input type="submit" value="Update">
+                    </form>
+                    </td>
+                    <td>
+                            <form method="post" action="/patient/deleteReservation">
+                            <input type="hidden" name="ReserveNum" value={{ReserveNum}}>
+                           <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {{/each}}
 {{!-- Reservation Add --}}
-                            <tr>
+                <tr>
                 <form method="post" action="/patient/addReservation">
                     <td><input type="hidden" name="PatientId" value=""></td>
                     <td><input type="text" name="DepartmentId" value=""></td>

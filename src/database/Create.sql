@@ -12,9 +12,9 @@ CREATE TABLE Building (
 -- Room Table: 입원실 정보(RoomId, Name, Capacity, BuildingId)
 CREATE TABLE Room (
   RoomId INT NOT NULL AUTO_INCREMENT,
+  BuildingId INT NOT NULL,
   Name VARCHAR(45) NULL,
   Capacity INT NULL,
-  BuildingId INT NULL,
   PRIMARY KEY (RoomId),
   FOREIGN KEY (BuildingId) REFERENCES Building(BuildingId) 
   ON UPDATE CASCADE ON DELETE CASCADE
@@ -23,8 +23,8 @@ CREATE TABLE Room (
 -- MedicalSpecialty Table: 전문 부서 정보(DepartmentId, Name, PhoneNumber)
 CREATE TABLE MedicalSpecialty (
   DepartmentId INT NOT NULL AUTO_INCREMENT,
-  RoomId INT,
-  Name VARCHAR(30) NULL,
+  RoomId INT NULL,
+  Name VARCHAR(30) NOT NULL,
   PhoneNumber VARCHAR(45) NULL,
   PRIMARY KEY (DepartmentId),
   FOREIGN KEY(RoomId) REFERENCES Room(RoomId)
@@ -37,7 +37,7 @@ CREATE TABLE Manager (
   Name VARCHAR(30) NULL,
   Address VARCHAR(45) NULL,
   PhoneNumber VARCHAR(45) NULL,
-  Password VARCHAR(45) NULL,
+  Password VARCHAR(45) NOT NULL,
   PRIMARY KEY(ManagerId),
   FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId)
   ON UPDATE CASCADE ON DELETE CASCADE
@@ -47,10 +47,10 @@ CREATE TABLE Manager (
 CREATE TABLE Doctor (
     DoctorId VARCHAR(30) NOT NULL,
     DepartmentId INT NOT NULL,
-    Name VARCHAR(30) NULL,
+    Name VARCHAR(30) NOT NULL,
     Address VARCHAR(45) NULL,
     PhoneNumber VARCHAR(45) NULL,
-    Password VARCHAR(45) NULL,
+    Password VARCHAR(45) NOT NULL,
     PRIMARY KEY (DoctorId),
     FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId)
     ON UPDATE CASCADE ON DELETE CASCADE
@@ -59,11 +59,11 @@ CREATE TABLE Doctor (
 -- Nurse Table: 간호사 정보(NurseId, DepartmentId)
 CREATE TABLE Nurse (
   NurseId VARCHAR(30) NOT NULL,
-  DepartmentId INT NULL,
-  Name VARCHAR(45) NULL,
+  DepartmentId INT NOT NULL,
+  Name VARCHAR(45) NOT NULL,
   Address VARCHAR(45) NULL,
   PhoneNumber VARCHAR(45) NULL,
-  Password VARCHAR(45) NULL,
+  Password VARCHAR(45) NOT NULL,
   PRIMARY KEY (NurseId),
   FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId)
   ON UPDATE CASCADE ON DELETE CASCADE
@@ -74,15 +74,15 @@ CREATE TABLE Patient (
   PatientId VARCHAR(30) NOT NULL,
   DoctorId VARCHAR(30) NULL,
   NurseId VARCHAR(30) NULL,
-  Name VARCHAR(45) NULL,
+  Name VARCHAR(45) NOT NULL,
   SocialSecurityNum INT NULL,
   Gender CHAR(1) NULL,
   Address VARCHAR(45) NULL,
-  BloodType CHAR(3) NULL,
+  BloodType CHAR(3) NOT NULL,
   Height FLOAT NULL,
   Weight FLOAT NULL,
   PhoneNumber VARCHAR(45) NULL,
-  Password VARCHAR(45) NULL,
+  Password VARCHAR(45) NOT NULL,
   PRIMARY KEY (PatientId),
   FOREIGN KEY (DoctorId) REFERENCES Doctor(DoctorId)
   ON UPDATE CASCADE ON DELETE CASCADE,
@@ -93,10 +93,10 @@ CREATE TABLE Patient (
 -- Examination Table: 검사 정보(ExaminationId, DoctorId, PatientId)
 CREATE TABLE Examination (
   ExaminationId INT NOT NULL AUTO_INCREMENT,
-  ExamDate DATETIME NULL,
+  ExamDate DATETIME NOT NULL,
   Details VARCHAR(45) NULL,
-  DoctorId VARCHAR(30) NULL,
-  PatientId VARCHAR(30) NULL,
+  DoctorId VARCHAR(30) NOT NULL,
+  PatientId VARCHAR(30) NOT NULL,
   PRIMARY KEY (ExaminationId),
   FOREIGN KEY (DoctorId) REFERENCES Doctor(DoctorId) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (PatientId) REFERENCES Patient(PatientId) ON UPDATE CASCADE ON DELETE CASCADE
@@ -105,9 +105,9 @@ CREATE TABLE Examination (
 -- Reservation Table: 예약 정보(ReserveNum, DepartmentId, PatientId)
 CREATE TABLE Reservation (
   ReserveNum INT NOT NULL AUTO_INCREMENT,
-  ReserveDate DATETIME NULL,
-  DepartmentId INT NULL,
-  PatientId VARCHAR(30) NULL,
+  ReserveDate DATETIME NOT NULL,
+  DepartmentId INT NOT NULL,
+  PatientId VARCHAR(30) NOT NULL,
   PRIMARY KEY (ReserveNum),
   FOREIGN KEY (DepartmentId) REFERENCES MedicalSpecialty(DepartmentId) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (PatientId) REFERENCES Patient(PatientId)ON UPDATE CASCADE ON DELETE CASCADE
@@ -118,7 +118,7 @@ CREATE TABLE Treatment (
   TreatmentId INT NOT NULL AUTO_INCREMENT,
   PatientId VARCHAR(30) NOT NULL,
   NurseId VARCHAR(30) NOT NULL,
-  TreatTime DATETIME,
+  TreatTime DATETIME NOT NULL,
   Details VARCHAR(45) NULL,
   PRIMARY KEY (TreatmentId),
   FOREIGN KEY (PatientId) REFERENCES Patient(PatientId) ON UPDATE CASCADE ON DELETE CASCADE,
